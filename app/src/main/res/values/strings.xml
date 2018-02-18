@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">InterviewMe</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <integer-array name="android_drawable">
+        <item>@drawable/logo</item>
+        <item>@drawable/projectstructure</item>
+        <item>@drawable/layouticon</item>
+        <item>@drawable/activityintent</item>
+        <item>@drawable/fragment</item>
+        <item>@drawable/adapter</item>
+        <item>@drawable/providerloader</item>
+        <item>@drawable/storag</item>
+        <item>@drawable/receiver</item>
+        <item>@drawable/service</item>
+        <item>@drawable/library</item>
+        <item>@drawable/network</item>
+    </integer-array>
+</resources>
