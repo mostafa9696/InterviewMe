@@ -20,5 +20,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowContentTransitions">true</item>
     </style>
+    <style name="MySeekBar" parent="Widget.AppCompat.SeekBar">
+        <item name="android:progressBackgroundTint">#4f5b97</item>
+        <item name="android:progressTint">#172c60</item>
+        <item name="android:colorControlActivated">#249f95</item>
+    </style>
 
 </resources>

@@ -59,25 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         androidBtn.setOnClickListener(this);
         javaBtn.setOnClickListener(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // testData();
     }
-    /*
-    @SuppressLint("StaticFieldLeak")
-    public void testData(){
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                topics=topicDAO.getAllTopic();
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                //for(Topic t : topics)
-                  //  Log.d("jj7", String.valueOf(t.getId())+" "+t.getName()+" "+t.getCategory());
-                super.onPostExecute(aVoid);
-            }
-        }.execute();
-    }*/
     public void startButtonAnim(int id,int flag){
         animation= AnimationUtils.loadAnimation(this,id);
         if(flag==1) {
@@ -104,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent=new Intent(this, FavoriteActivity.class);
             startActivity(intent);
         }
-
         drawerLayout.closeDrawer(GravityCompat.START);
             return true;
     }

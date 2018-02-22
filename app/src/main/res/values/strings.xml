@@ -16,4 +16,5 @@
         <item>@drawable/library</item>
         <item>@drawable/network</item>
     </integer-array>
+    <string name="select_color">Select a color</string>
 </resources>

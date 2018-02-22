@@ -38,7 +38,6 @@ public class QuestionFavAdapter extends RecyclerView.Adapter<QuestionFavAdapter.
         for(int i=0 ; i<favoriteQuestions.size() ; i++){
             expandState.append(i,false);
         }
-
     }
 
     @Override

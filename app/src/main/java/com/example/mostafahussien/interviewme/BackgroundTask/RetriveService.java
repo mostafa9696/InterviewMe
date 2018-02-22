@@ -55,8 +55,6 @@ public class RetriveService extends IntentService{
             for(int j=0 ; j<questionAnswers.size() ; j++){
                 fav=false;
                 for(int i=0 ; i<favs.size() ; i++){
-                    if(j==0)
-                        Log.d("hh", favs.get(i).getQuestion());
                 if(questionAnswers.get(j).getQuestion().equals(favs.get(i).getQuestion())){
                     questionAnswers.get(j).setFav(true);
                     fav=true;

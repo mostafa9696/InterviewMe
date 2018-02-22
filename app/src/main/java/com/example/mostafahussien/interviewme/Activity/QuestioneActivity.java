@@ -6,38 +6,38 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.os.Build;
-import android.support.design.widget.AppBarLayout;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.support.v4.app.DialogFragment;
 
+import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.example.mostafahussien.interviewme.Adapter.QuestionAdapter;
 import com.example.mostafahussien.interviewme.Adapter.QuestionFavAdapter;
 import com.example.mostafahussien.interviewme.Adapter.TopicAdapter;
 import com.example.mostafahussien.interviewme.BackgroundTask.InsertService;
 import com.example.mostafahussien.interviewme.BackgroundTask.RetriveFavoriteService;
 import com.example.mostafahussien.interviewme.BackgroundTask.RetriveService;
+import com.example.mostafahussien.interviewme.Interface.OnDialogSaved;
 import com.example.mostafahussien.interviewme.Interface.OnSelectFavorite;
 import com.example.mostafahussien.interviewme.Listener.OnTopicPressListener;
+import com.example.mostafahussien.interviewme.Model.EditDialog;
 import com.example.mostafahussien.interviewme.Model.FavoriteQuestion;
 import com.example.mostafahussien.interviewme.Model.QuestionAnswer;
 import com.example.mostafahussien.interviewme.R;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
-public class QuestioneActivity extends AppCompatActivity {
+public class QuestioneActivity extends AppCompatActivity implements OnDialogSaved{
     String topicName,category;
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbar;
@@ -91,9 +91,12 @@ public class QuestioneActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DialogFragment dialog = new EditDialog();
+                dialog.show(getSupportFragmentManager(), "EditDialog");
             }
         });
             getQuestionAnswerData();
+
     }
     public void favAction(String action,QuestionAnswer questionAnswer){
         Intent favIntent=new Intent(this,InsertService.class);
@@ -126,5 +129,10 @@ public class QuestioneActivity extends AppCompatActivity {
         super.onPause();
             unregisterReceiver(receiver);
 
+    }
+
+    @Override
+    public void onSavedValues(int textSize, int selectedAnswerColor, int selectedQuestionColor) {
+        questionAdapter.updateViews(textSize,selectedAnswerColor,selectedQuestionColor);
     }
 }

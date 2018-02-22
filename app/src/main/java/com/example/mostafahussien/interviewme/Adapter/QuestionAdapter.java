@@ -3,11 +3,15 @@ package com.example.mostafahussien.interviewme.Adapter;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.Image;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,17 +43,21 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private ArrayList<QuestionAnswer> questionAnswers;
     private SparseBooleanArray expandState;                 // map integer to boolean with more memory efficient than using a HashMap to map Integers to Booleans
     private OnSelectFavorite onSelectFavorite;
-
+    private int textSize,questionColor,answerColor;
+    SharedPreferences prefs;
     public QuestionAdapter(Context context, ArrayList<QuestionAnswer> questionAnswers,OnSelectFavorite onSelectFavorite) {
         this.onSelectFavorite=onSelectFavorite;
         this.context = context;
         this.questionAnswers = questionAnswers;
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        questionColor=prefs.getInt("question_color",R.color.questionText);
+        answerColor=prefs.getInt("answer_color",R.color.answerText);
+        textSize= prefs.getInt("text_size",21);
         expandState=new SparseBooleanArray();
         for(int i=0 ; i<questionAnswers.size() ; i++){
             expandState.append(i,false);
         }
     }
-
     @Override
     public int getItemViewType(int position) {
         if(questionAnswers.get(position).isExpandable()) {       // with child case it is always use in this case
@@ -76,7 +84,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         switch (holder.getItemViewType())
         {
-            case 0: {
+            case 0: {                                                                   // not used just for know
                 ParentViewHolder parentViewHolder = (ParentViewHolder) holder;
                 QuestionAnswer questionAnswer=questionAnswers.get(position);
                 parentViewHolder.setIsRecyclable(false);
@@ -88,6 +96,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 QuestionAnswer questionAnswer=questionAnswers.get(position);
                 childViewHolder.setIsRecyclable(false);
                 childViewHolder.question.setText(questionAnswer.getQuestion());
+                childViewHolder.question.setTextSize(TypedValue.COMPLEX_UNIT_SP,textSize);
+                childViewHolder.question.setTextColor(questionColor);
                 childViewHolder.expandableLayout.setInRecyclerView(true);
                 childViewHolder.expandableLayout.setExpanded(expandState.get(position));
                 childViewHolder.expandableLayout.setListener(new ExpandableLayoutListenerAdapter() {
@@ -111,6 +121,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }
                 });
                 childViewHolder.answer.setText(questionAnswer.getAnswer());
+                childViewHolder.answer.setTextSize(TypedValue.COMPLEX_UNIT_SP,textSize);
+                childViewHolder.answer.setTextColor(answerColor);
                 if(questionAnswers.get(position).isFav()){
                     childViewHolder.likeButton.setLiked(true);
                 }
@@ -164,10 +176,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public void liked(LikeButton likeButton) {
             onSelectFavorite.onSelect(getAdapterPosition(),"like");
         }
-
         @Override
         public void unLiked(LikeButton likeButton) {
             onSelectFavorite.onSelect(getAdapterPosition(),"unLike");
         }
+    }
+    public void updateViews(int textSize,int selectedAnswerColor,int selectedQuestionColor){
+        this.textSize=textSize;
+        answerColor=selectedAnswerColor;
+        questionColor=selectedQuestionColor;
+        notifyDataSetChanged();
     }
 }
