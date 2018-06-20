@@ -5,12 +5,11 @@
     <integer-array name="android_drawable">
         <item>@drawable/logo</item>
         <item>@drawable/projectstructure</item>
-        <item>@drawable/layouticon</item>
+        <item>@drawable/layout</item>
         <item>@drawable/activityintent</item>
-        <item>@drawable/fragment</item>
-        <item>@drawable/adapter</item>
-        <item>@drawable/providerloader</item>
-        <item>@drawable/storag</item>
+        <item>@drawable/fragmenticon</item>
+        <item>@drawable/contetntprovider</item>
+        <item>@drawable/storgae</item>
         <item>@drawable/receiver</item>
         <item>@drawable/service</item>
         <item>@drawable/library</item>

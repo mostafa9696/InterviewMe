@@ -42,7 +42,7 @@ public class QuestionFavAdapter extends RecyclerView.Adapter<QuestionFavAdapter.
 
     @Override
     public QuestionFavAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new QuestionFavAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.question_item_list,parent,false));
+        return new QuestionFavAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.question_item_fav,parent,false));
     }
 
     @Override

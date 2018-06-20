@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,6 +24,8 @@ import com.example.mostafahussien.interviewme.Activity.AndroidActivity;
 import com.example.mostafahussien.interviewme.Activity.FavoriteActivity;
 import com.example.mostafahussien.interviewme.Activity.QuestioneActivity;
 import com.example.mostafahussien.interviewme.Database.AppDatabase;
+import com.example.mostafahussien.interviewme.Interface.OnDialogSaved;
+import com.example.mostafahussien.interviewme.Model.EditDialog;
 import com.example.mostafahussien.interviewme.Model.FavoriteQuestion;
 import com.example.mostafahussien.interviewme.Model.Topic;
 
@@ -30,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener, OnDialogSaved {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ImageButton androidBtn,javaBtn;
@@ -80,8 +83,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id=item.getItemId();
         if(id==R.id.edit_profile)
             Toast.makeText(getApplicationContext(),"edit",Toast.LENGTH_LONG).show();
-        else if(id==R.id.drawer_item_settings)
-            Toast.makeText(getApplicationContext(),"setting",Toast.LENGTH_LONG).show();
+        else if(id==R.id.drawer_item_settings) {
+            DialogFragment dialog = new EditDialog();
+            dialog.show(getSupportFragmentManager(), "EditDialog");
+        }
         else if(id==R.id.favorite_item){
             Intent intent=new Intent(this, FavoriteActivity.class);
             startActivity(intent);
@@ -116,5 +121,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public void onSavedValues(int textSize, int selectedAnswerColor, int selectedQuestionColor) {
+
     }
 }

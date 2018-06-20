@@ -52,7 +52,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         questionColor=prefs.getInt("question_color",R.color.questionText);
         answerColor=prefs.getInt("answer_color",R.color.answerText);
-        textSize= prefs.getInt("text_size",21);
+        textSize= prefs.getInt("text_size",20);
         expandState=new SparseBooleanArray();
         for(int i=0 ; i<questionAnswers.size() ; i++){
             expandState.append(i,false);
@@ -100,6 +100,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 childViewHolder.question.setTextColor(questionColor);
                 childViewHolder.expandableLayout.setInRecyclerView(true);
                 childViewHolder.expandableLayout.setExpanded(expandState.get(position));
+                childViewHolder.expand_arrow.setClickable(true);
+                childViewHolder.likeButton.setClickable(true);
                 childViewHolder.expandableLayout.setListener(new ExpandableLayoutListenerAdapter() {
                     @Override
                     public void onPreOpen() {
@@ -175,10 +177,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @Override
         public void liked(LikeButton likeButton) {
             onSelectFavorite.onSelect(getAdapterPosition(),"like");
+            questionAnswers.get(getAdapterPosition()).setFav(true);
         }
         @Override
         public void unLiked(LikeButton likeButton) {
             onSelectFavorite.onSelect(getAdapterPosition(),"unLike");
+            questionAnswers.get(getAdapterPosition()).setFav(false);
         }
     }
     public void updateViews(int textSize,int selectedAnswerColor,int selectedQuestionColor){

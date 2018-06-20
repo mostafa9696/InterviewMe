@@ -29,11 +29,11 @@ public class InsertService extends IntentService{
         favoriteQuestion=new FavoriteQuestion(questionAnswer.getQuestion(),questionAnswer.getAnswer(),topic_name);
         if(insert_type.equals("insert_fav")){
             favoriteDAO.inserFav(favoriteQuestion);
+            Log.d("aa1", "inserFav: ");
         } else if(insert_type.equals("remove_fav")) {
             int fav_id=favoriteDAO.getFavID(topic_name,questionAnswer.getAnswer());
             favoriteQuestion.setFavorite_id(fav_id);
             favoriteDAO.deleteFav(favoriteQuestion);
         }
     }
-
 }

@@ -7,7 +7,6 @@
     android:clipChildren="false"
     android:layout_marginLeft="2dp"
     android:layout_marginRight="2dp"
-    android:foreground="?android:attr/selectableItemBackground"
     card_view:cardCornerRadius="8dp"
     card_view:cardUseCompatPadding="true"
     android:theme="@style/MyTheme"
@@ -24,7 +23,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:textColor="#b68054"
             android:text="what is the main ?"
             android:textSize="21sp"
@@ -32,7 +31,10 @@
             android:layout_weight="8.5"
             android:id="@+id/question_id"
             android:gravity="center_vertical"
+            android:layout_marginRight="40dp"
             />
+
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"

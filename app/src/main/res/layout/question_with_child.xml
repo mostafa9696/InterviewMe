@@ -25,18 +25,19 @@
             android:id="@+id/question_container"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:background="#a84fc292"
             >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/questionText"
-            android:text="what is the main  ?"
-            android:textSize="21sp"
-            android:layout_marginLeft="5dp"
-            android:id="@+id/question_id"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="55dp"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/questionText"
+                android:text="what is the main  ?"
+                android:textSize="21sp"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/question_id"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="45dp"
+                />
             <com.like.LikeButton
                 app:icon_type="heart"
                 app:icon_size="25dp"
@@ -70,6 +71,7 @@
         app:ael_interpolator="bounce"
         app:ael_expanded="false"
         android:layout_below="@+id/question_container"
+        android:background="#a066d6a7"
         >
         <TextView
             android:layout_width="match_parent"
